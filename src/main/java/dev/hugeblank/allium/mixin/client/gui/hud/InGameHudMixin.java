@@ -2,6 +2,7 @@ package dev.hugeblank.allium.mixin.client.gui.hud;
 
 import dev.hugeblank.allium.lua.api.DefaultEventsLib;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Final;
@@ -25,13 +26,13 @@ public class InGameHudMixin {
 
     private final InGameHud thiz = (InGameHud) (Object) this;
 
-    @Inject(at = @At("HEAD"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;F)V")
-    private void renderHead(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        DefaultEventsLib.CLIENT_RENDER_HEAD.invoker().onGuiRender(client, matrices, tickDelta, scaledWidth, scaledHeight, thiz.getTextRenderer());
+    @Inject(at = @At("HEAD"), method = "render")
+    private void renderHead(DrawContext context, float tickDelta, CallbackInfo ci) {
+        DefaultEventsLib.CLIENT_RENDER_HEAD.invoker().onGuiRender(client, context, tickDelta, scaledWidth, scaledHeight, thiz.getTextRenderer());
     }
 
-    @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;F)V")
-    private void renderTail(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
-        DefaultEventsLib.CLIENT_RENDER_TAIL.invoker().onGuiRender(client, matrices, tickDelta, scaledWidth, scaledHeight, thiz.getTextRenderer());
+    @Inject(at = @At("TAIL"), method = "render")
+    private void renderTail(DrawContext context, float tickDelta, CallbackInfo ci) {
+        DefaultEventsLib.CLIENT_RENDER_TAIL.invoker().onGuiRender(client, context, tickDelta, scaledWidth, scaledHeight, thiz.getTextRenderer());
     }
 }

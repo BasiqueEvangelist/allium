@@ -23,7 +23,7 @@
     "recipe.RecipeManagerMixin",
     "recipe.ShapedRecipeMixin",
     "recipe.ShapelessRecipeMixin",
-    "recipe.SmithingRecipeMixin",
+    "recipe.SmithingTransformRecipeMixin",
     "recipe.fabric.RecipeManagerMixin",
     "resource.ResourcePackManagerMixin"
   ],

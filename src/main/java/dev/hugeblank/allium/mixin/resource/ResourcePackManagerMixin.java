@@ -22,8 +22,8 @@ public class ResourcePackManagerMixin {
     @Mutable
     private Set<ResourcePackProvider> providers;
 
-    @Inject(at = @At("RETURN"), method = "<init>(Lnet/minecraft/resource/ResourcePackProfile$Factory;[Lnet/minecraft/resource/ResourcePackProvider;)V")
-    private void init(ResourcePackProfile.Factory profileFactory, ResourcePackProvider[] providers, CallbackInfo ci) {
+    @Inject(at = @At("RETURN"), method = "<init>")
+    private void init(ResourcePackProvider[] providers, CallbackInfo ci) {
         this.providers = new HashSet<>(this.providers);
         this.providers.add(new AlliumResourcePackProvider());
     }

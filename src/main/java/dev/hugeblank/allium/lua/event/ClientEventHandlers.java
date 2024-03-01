@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
 
@@ -22,7 +23,7 @@ public class ClientEventHandlers {
 
     public interface GuiRender {
         @Environment(EnvType.CLIENT)
-        void onGuiRender(MinecraftClient client, MatrixStack matrices, float tickDelta, int scaledWidth, int scaledHeight, TextRenderer textRenderer);
+        void onGuiRender(MinecraftClient client, DrawContext context, float tickDelta, int scaledWidth, int scaledHeight, TextRenderer textRenderer);
 
         @Environment(EnvType.SERVER)
         void onGuiRender();

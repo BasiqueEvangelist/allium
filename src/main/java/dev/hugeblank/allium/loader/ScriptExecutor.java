@@ -4,12 +4,13 @@ import dev.hugeblank.allium.lua.api.*;
 import dev.hugeblank.allium.lua.api.PackageLib;
 import me.basiqueevangelist.enhancedreflection.api.EClass;
 import dev.hugeblank.allium.Allium;
-import me.hugeblank.allium.lua.api.*;
+import dev.hugeblank.allium.lua.api.*;
 import dev.hugeblank.allium.lua.api.commands.CommandLib;
 import dev.hugeblank.allium.lua.api.commands.CommandsLib;
 import dev.hugeblank.allium.lua.api.http.HttpLib;
 import dev.hugeblank.allium.lua.api.recipe.RecipeLib;
 import dev.hugeblank.allium.lua.type.TypeCoercions;
+import org.jetbrains.annotations.Nullable;
 import org.squiddev.cobalt.*;
 import org.squiddev.cobalt.compiler.CompileException;
 import org.squiddev.cobalt.compiler.LoadState;
@@ -17,7 +18,6 @@ import org.squiddev.cobalt.function.LuaFunction;
 import org.squiddev.cobalt.function.VarArgFunction;
 import org.squiddev.cobalt.lib.*;
 
-import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 

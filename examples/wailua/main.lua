@@ -4,13 +4,13 @@
 -- This is a demonstration of how allium is not just for server sided use cases.
 local Text = java.import("net.minecraft.text.Text")
 local BlockPos = java.import("net.minecraft.util.math.BlockPos")
-local Registry = java.import("Registry")
+local Registries = java.import("Registries")
 
 local renderText -- The text to be shared between the render event and tick event
 
-events.CLIENT_RENDER_TAIL:register(script, function(client, matrices, tickDelta, scaledWidth, scaledHeight, textRenderer)
+events.CLIENT_RENDER_TAIL:register(script, function(client, context, tickDelta, scaledWidth, scaledHeight, textRenderer)
     if renderText then -- If there's text, then draw it at the top center, account for the offset of the text
-        textRenderer:draw(matrices, renderText, (scaledWidth/2)-(textRenderer:getWidth(renderText)/2), 5, 0xffffff);
+        context:drawText(textRenderer, renderText, math.floor((scaledWidth/2)-(textRenderer:getWidth(renderText)/2)), 5, 0xffffff, false);
         -- The position 5 was arbitrarily chosen, and was the first value I picked just to test. It worked perfectly.
         -- Exercise for the reader - Create a background frame behind the text, so it can be viewed on white backgrounds.
     end
@@ -18,7 +18,7 @@ end)
 
 events.CLIENT_PLAYER_TICK:register(script, function(player)
     -- Finally, use the block to get the identifier of the block
-    local identifier = Registry.BLOCK:getId(
+    local identifier = Registries.BLOCK:getId(
     -- Use the position to get the state, then the block attributed to that state
             player.world:getBlockState(
             -- Convert position to an actual BlockPos

@@ -9,8 +9,8 @@ import dev.hugeblank.allium.lua.type.annotation.OptionalArg;
 import me.basiqueevangelist.enhancedreflection.api.EClass;
 import me.basiqueevangelist.enhancedreflection.api.EMethod;
 import me.basiqueevangelist.enhancedreflection.api.typeuse.EClassUse;
-import me.hugeblank.allium.lua.type.*;
-import me.hugeblank.allium.lua.type.annotation.*;
+import dev.hugeblank.allium.lua.type.*;
+import dev.hugeblank.allium.lua.type.annotation.*;
 import org.squiddev.cobalt.*;
 
 import java.lang.reflect.InaccessibleObjectException;
@@ -40,7 +40,7 @@ public class JavaLib implements WrappedLuaLibrary {
             "net.minecraft.village.",
             "net.minecraft.world.",
             "net.minecraft.util.",
-            "net.minecraft.util.registry.",
+            "net.minecraft.registry.",
             "net.minecraft.server.",
             "net.minecraft.server.command.",
             "net.minecraft.server.world.",

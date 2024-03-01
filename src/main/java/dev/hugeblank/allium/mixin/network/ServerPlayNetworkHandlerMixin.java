@@ -16,9 +16,9 @@ public class ServerPlayNetworkHandlerMixin {
     @Shadow
     public ServerPlayerEntity player;
 
-    @Inject(at = @At(value = "INVOKE", shift = At.Shift.BEFORE, target = "Lnet/minecraft/server/PlayerManager;broadcast(Lnet/minecraft/server/filter/FilteredMessage;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/util/registry/RegistryKey;)V"), method = "handleDecoratedMessage")
-    private void onChatMessage(FilteredMessage<SignedMessage> message, CallbackInfo ci) {
-        var msg = message.raw().getContent();
+    @Inject(at = @At(value = "INVOKE", shift = At.Shift.BEFORE, target = "Lnet/minecraft/server/PlayerManager;broadcast(Lnet/minecraft/network/message/SignedMessage;Lnet/minecraft/server/network/ServerPlayerEntity;Lnet/minecraft/network/message/MessageType$Parameters;)V"), method = "handleDecoratedMessage")
+    private void onChatMessage(SignedMessage message, CallbackInfo ci) {
+        var msg = message.getContent();
         DefaultEventsLib.CHAT_MESSAGE.invoker().onChatMessage(player, msg.getString());
     }
 }

@@ -9,6 +9,7 @@ import dev.hugeblank.allium.lua.type.annotation.LuaIndex;
 import dev.hugeblank.allium.lua.type.annotation.LuaWrapped;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import org.apache.commons.lang3.mutable.MutableBoolean;
 
 import java.util.Collections;
 
@@ -35,8 +36,14 @@ public class CommandsLib implements WrappedLuaLibrary {
         if (isServerNull()) return null;
 
         CommandManager manager = Allium.SERVER.getCommandManager();
-        ServerCommandSource source = Allium.SERVER.getCommandSource();
-        return manager.execute(source, String.join(" ", args)) != 0;
+        MutableBoolean result = new MutableBoolean(false);
+        ServerCommandSource source = Allium.SERVER.getCommandSource().withReturnValueConsumer((successful, returnValue) -> {
+            result.setValue(returnValue != 0);
+        });
+
+        manager.executeWithPrefix(source, String.join(" ", args));
+
+        return result.booleanValue();
     }
 
     @LuaIndex
@@ -44,12 +51,20 @@ public class CommandsLib implements WrappedLuaLibrary {
         if (isServerNull()) return null;
 
         CommandManager manager = Allium.SERVER.getCommandManager();
-        ServerCommandSource source = Allium.SERVER.getCommandSource();
         CommandDispatcher<ServerCommandSource> dispatcher = manager.getDispatcher();
         CommandNode<?> node = dispatcher.findNode(Collections.singleton(command));
 
         if (node == null) return null;
-        else return (args) -> manager.execute(source, (command + " " + String.join(" ", args).trim())) != 0;
+        else return (args) -> {
+            MutableBoolean result = new MutableBoolean(false);
+            ServerCommandSource source = Allium.SERVER.getCommandSource().withReturnValueConsumer((successful, returnValue) -> {
+                result.setValue(returnValue != 0);
+            });
+
+            manager.executeWithPrefix(source, (command + " " + String.join(" ", args).trim()));
+
+            return result.booleanValue();
+        };
     }
 
     @FunctionalInterface
