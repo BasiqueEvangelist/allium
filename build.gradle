@@ -41,6 +41,10 @@ repositories {
 	}
 }
 
+sourceSets {
+	ap { }
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -53,6 +57,8 @@ dependencies {
 	modImplementation include("io.netty:netty-codec-http:4.1.77.Final")
 	modImplementation "eu.pb4:placeholder-api:${project.placeholder_api}"
 
+	apImplementation "com.google.code.gson:gson:2.10.1"
+	annotationProcessor sourceSets.ap.runtimeClasspath
 
 	// Used for testing Scripts. No code in the repo should depend on these
 	//modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api}"

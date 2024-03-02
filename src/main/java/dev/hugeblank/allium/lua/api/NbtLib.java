@@ -12,8 +12,16 @@ import org.squiddev.cobalt.ValueFactory;
 
 import java.util.Set;
 
+/**
+ * A set of utilities for working with NBT values.
+ */
 @LuaWrapped(name = "nbt")
 public class NbtLib implements WrappedLuaLibrary {
+    /**
+     * Converts an NBT element to a Lua value.
+     * @param element the NBT element
+     * @return an equivalent Lua value
+     */
     @LuaWrapped
     public static LuaValue fromNbt(NbtElement element) {
         return switch (element.getType()) {
@@ -48,6 +56,11 @@ public class NbtLib implements WrappedLuaLibrary {
         };
     }
 
+    /**
+     * Converts a Lua value to an equivalent NBT value
+     * @param value any Lua value
+     * @return an equivalent NBT value or {@code null} if conversion failed
+     */
     @Nullable
     @LuaWrapped
     public static NbtElement toNbt(LuaValue value) {
