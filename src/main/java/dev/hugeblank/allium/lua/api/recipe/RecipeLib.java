@@ -4,7 +4,6 @@ import dev.hugeblank.allium.lua.api.WrappedLuaLibrary;
 import dev.hugeblank.allium.lua.type.annotation.CoerceToBound;
 import dev.hugeblank.allium.lua.event.SimpleEventType;
 import dev.hugeblank.allium.lua.type.annotation.LuaWrapped;
-import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
